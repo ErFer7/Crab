@@ -1,0 +1,8 @@
+[build]
+target = "platforms/rv64.json"
+rustflags = ["-C", "link-arg=-Tlinker.ld"]
+
+[unstable]
+json-target-spec = true
+build-std-features = ["compiler-builtins-mem"]
+build-std = ["core", "compiler_builtins"]
