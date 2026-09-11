@@ -1,24 +1,32 @@
 OUTPUT_ARCH(riscv)
-ENTRY(_start)
+ENTRY(_boot)
 
 SECTIONS
 {
     . = 0x80000000;
 
     .text : {
-        *(.text._start)
-        *(.text .text.*)
+        *(.text._boot)
+        *(.text)
+        *(.text.*)
     }
 
     .rodata : {
-        *(.rodata .rodata.*)
+        *(.rodata)
+        *(.rodata.*)
     }
 
     .data : {
-        *(.data .data.*)
+        *(.data)
+        *(.data.*)
     }
 
-    .bss : {
-        *(.bss .bss.*)
+    .bss :
+    {
+        __bss_start = .;
+        *(.bss)
+        *(.bss.*)
+        *(COMMON)
+        __bss_end = .;
     }
 }
