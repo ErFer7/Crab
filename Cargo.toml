@@ -1,18 +1,29 @@
 [package]
-name = "Crab"
+name = "crab"
 version = "0.1.0"
 edition = "2024"
+build = "build.rs"
+
+[features]
+default = []
+qemu-riscv64-virt = []
+longan-nano = []
 
 [dependencies]
 
+[build-dependencies]
+toml = "0.8.23"
+serde = { version = "1.0.229", features = ["derive"] }
+
 [profile.dev]
 panic = "abort"
+debug-assertions = false
 
 [profile.release]
 panic = "abort"
 strip = true
 
 [[bin]]
-name = "Crab"
+name = "crab"
 test = false
 bench = false

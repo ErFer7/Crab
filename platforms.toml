@@ -1,0 +1,9 @@
+[[platform]]
+name        = "qemu-riscv64-virt"
+feature     = "qemu-riscv64-virt"
+linker      = "platforms/qemu_riscv64_virt/linker.ld"
+
+[[platform]]
+name        = "longan_nano"
+feature     = "longan-nano"
+linker      = "platforms/longan_nano/linker.ld"
