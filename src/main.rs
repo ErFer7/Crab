@@ -29,7 +29,11 @@ unsafe extern "C" {
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
-    loop {}
+    print("The kernel situation is crazy!");
+
+    loop {
+        CPU::halt();
+    }
 }
 
 fn print(string: &str) {
