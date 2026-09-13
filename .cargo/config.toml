@@ -1,5 +1,5 @@
 [build]
-target = "platforms/qemu_riscv64_virt/qemu-riscv64-virt.json"
+target = "platforms/qemu_riscv32_virt/qemu-riscv64-virt.json"
 
 rustflags = ["--cfg", 'platform="qemu-riscv64-virt"']
 

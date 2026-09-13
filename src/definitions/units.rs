@@ -4,6 +4,7 @@ impl ByteUnits {
     pub const KB: usize = 1024;
     pub const MB: usize = ByteUnits::KB * 1024;
     pub const GB: usize = ByteUnits::MB * 1024;
+    #[cfg(target_pointer_width = "64")]
     pub const TB: usize = ByteUnits::GB * 1024;
     #[cfg(target_pointer_width = "64")]
     pub const PB: usize = ByteUnits::TB * 1024;

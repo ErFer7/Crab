@@ -67,9 +67,9 @@ extern "C" fn start() -> ! {
 
     UART::init();
 
-    let text = include_str!("./boot_greeting.txt");
+    let greeting = include_str!("./boot_greeting.txt");
 
-    print(text);
+    print(greeting);
 
     loop {
         CPU::halt();

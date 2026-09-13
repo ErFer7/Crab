@@ -7,6 +7,7 @@ build = "build.rs"
 [features]
 default = []
 qemu-riscv64-virt = []
+qemu-riscv32-virt = []
 longan-nano = []
 
 [dependencies]

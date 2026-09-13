@@ -1,21 +1,20 @@
-
 use crate::definitions::units::ByteUnits as B;
 
-pub struct LonganNanoTraits;
+pub struct MemoryTraits;
 
-impl LonganNanoTraits {
+impl MemoryTraits {
     pub const RAM_SIZE: usize = 32 * B::KB;
 }
 
-pub struct LonganNanoMemoryMap;
+pub struct MemoryMap;
 
-impl LonganNanoMemoryMap {
+impl MemoryMap {
     pub const RAM_START: usize = 0x2000000;
-    pub const RAM_END: usize = LonganNanoMemoryMap::RAM_START + LonganNanoTraits::RAM_SIZE;
+    pub const RAM_END: usize = MemoryMap::RAM_START + MemoryTraits::RAM_SIZE;
 }
 
-pub struct LonganNanoSystemTraits;
+pub struct SystemTraits;
 
-impl LonganNanoSystemTraits {
-    pub const STACK_SIZE: usize = 1 * B::KB;
+impl SystemTraits {
+    pub const STACK_SIZE: usize = 4 * B::KB;
 }

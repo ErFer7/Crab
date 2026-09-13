@@ -9,10 +9,16 @@ pub use base_traits::BaseUARTTraits;
 pub mod qemu_riscv64_virt;
 
 #[cfg(platform = "qemu-riscv64-virt")]
-pub use qemu_riscv64_virt::{
-    VirtMemoryMap as MemoryMap, VirtMemoryTraits as MemoryTraits, VirtSystemTraits as SystemTraits,
-    VirtUARTTraits as UARTTraits,
-};
+pub use qemu_riscv64_virt::{MemoryMap, MemoryTraits, SystemTraits, UARTTraits};
+
+#[cfg(platform = "qemu-riscv32-virt")]
+pub mod qemu_riscv32_virt;
+
+#[cfg(platform = "qemu-riscv32-virt")]
+pub use qemu_riscv32_virt::{MemoryMap, MemoryTraits, SystemTraits, UARTTraits};
 
 #[cfg(platform = "longan-nano")]
 pub mod longan_nano;
+
+#[cfg(platform = "longan-nano")]
+pub use longan_nano::{MemoryMap, MemoryTraits, SystemTraits};
