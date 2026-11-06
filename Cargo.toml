@@ -13,7 +13,7 @@ longan-nano = []
 [dependencies]
 
 [build-dependencies]
-toml = "0.8.23"
+toml = "1.2.0+spec-1.1.0"
 serde = { version = "1.0.229", features = ["derive"] }
 
 [profile.dev]

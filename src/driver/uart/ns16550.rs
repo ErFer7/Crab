@@ -2,7 +2,7 @@ use core::ptr::write_volatile;
 
 use crate::{
     driver::{driver::Driver, uart::base_uart::BaseUART},
-    machine::{BaseUARTTraits, UARTTraits},
+    machine::UARTTraits,
     utilities::direct_memory::{Bit, Register, bit, mask},
 };
 

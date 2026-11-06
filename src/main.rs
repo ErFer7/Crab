@@ -19,7 +19,7 @@ use crate::{
     architecture::{BaseCPU, CPU, Status},
     driver::driver::Driver,
     driver::uart::{BaseUART, UART},
-    machine::{BaseMemoryTraits, BaseSystemTraits, MemoryTraits, SystemTraits},
+    machine::{MemoryTraits, SystemTraits},
 };
 
 unsafe extern "C" {
@@ -52,7 +52,7 @@ pub extern "C" fn _boot() -> ! {
         "li t1, {offset}",  // t1 = RAM_SIZE - STACK_SIZE
         "add sp, t0, t1",   // sp = boot stack
         "j {start}",
-        offset = const (MemoryTraits::RAM_SIZE - SystemTraits::STACK_SIZE * 2) as u64,
+        offset = const (MemoryTraits::RAM_SIZE - SystemTraits::STACK_SIZE * 2) as usize,
         start = sym start,
     );
 }
