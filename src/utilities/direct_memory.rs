@@ -15,23 +15,24 @@ pub trait DirectMemoryRegister {
     unsafe fn write_masked(address: usize, data: Self, mask_low: u32, mask_high: u32);
     unsafe fn read_masked(address: usize, mask_low: u32, mask_high: u32) -> Self;
 
+    // TODO: Evaluate this, it might be useless for most drivers
     unsafe fn read_bit(address: usize, bit: usize) -> Self;
 }
 
 macro_rules! impl_direct_memory_register {
-    ($type:ident, $width:expr) => {
+    ($type:ident) => {
         impl DirectMemoryRegister for $type {
             #[inline(always)]
             unsafe fn write_masked(address: usize, data: Self, mask_low: u32, mask_high: u32) {
                 let ptr = address as *mut $type;
 
                 let bounded_mask_high = if mask_high == u32::MAX {
-                    $width - 1
+                    <$type>::BITS - 1
                 } else {
                     mask_high
                 };
 
-                if mask_low == 0 && bounded_mask_high == $width - 1 {
+                if mask_low == 0 && bounded_mask_high == <$type>::BITS - 1 {
                     unsafe {
                         write_volatile(ptr, data);
                     }
@@ -55,12 +56,12 @@ macro_rules! impl_direct_memory_register {
                 let ptr = address as *mut $type;
 
                 let bounded_mask_high = if mask_high == u32::MAX {
-                    $width - 1
+                    <$type>::BITS - 1
                 } else {
                     mask_high
                 };
 
-                if mask_low == 0 && bounded_mask_high == $width - 1 {
+                if mask_low == 0 && bounded_mask_high == <$type>::BITS - 1 {
                     return unsafe { read_volatile(ptr) };
                 } else {
                     let mask =
@@ -82,10 +83,10 @@ macro_rules! impl_direct_memory_register {
     };
 }
 
-impl_direct_memory_register!(u8, 8);
-impl_direct_memory_register!(u16, 16);
-impl_direct_memory_register!(u32, 32);
-impl_direct_memory_register!(u64, 64);
+impl_direct_memory_register!(u8);
+impl_direct_memory_register!(u16);
+impl_direct_memory_register!(u32);
+impl_direct_memory_register!(u64);
 
 pub struct Register<
     T,
