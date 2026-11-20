@@ -69,6 +69,10 @@ extern "C" fn start() -> ! {
 
     let greeting = include_str!("./boot_greeting.txt");
 
+    print("> Crab OS\n");
+    print(concat!("> Architecture: ", env!("ARCH_STRING"), "\n"));
+    print(concat!("   >> ", env!("ARCH_FEATURES_STRING"), "\n"));
+    print(concat!("> Platform: ", env!("PLATFORM_STRING"), "\n\n"));
     print(greeting);
 
     loop {

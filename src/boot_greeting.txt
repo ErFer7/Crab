@@ -1,8 +1,3 @@
-> OS: Crab
-> Architecture: {arch}
-   >> {arch-features}
-> Platform: {platform}
-
        ..::.          .    .          .::..
       -==----==        \  /        ==----==-
      -==%8####8%8      |  |      8%8####8%==-

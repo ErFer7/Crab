@@ -65,10 +65,7 @@ impl Driver for NS16550 {
 impl BaseUART for NS16550 {
     fn write(data: char) {
         while (LineStatus::read() & LineStatusValues::TRANSMITTER_EMPTY == 0) {}
-
-        unsafe {
-            write_volatile(<NS16550 as Driver>::BASE as *mut u8, data as u8);
-        }
+        Buffer::write(data as u8);
     }
 
     // TODO: Implement

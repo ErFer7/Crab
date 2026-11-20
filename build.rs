@@ -67,4 +67,15 @@ fn main() {
 
     println!("cargo:rerun-if-changed={}", linker_script.display());
     println!("cargo:rustc-link-arg=-T{}", linker_script.display());
+    println!(
+        "cargo:rustc-env=ARCH_STRING={}",
+        env::var("CARGO_CFG_TARGET_ARCH").unwrap()
+    );
+    println!(
+        "cargo:rustc-env=ARCH_FEATURES_STRING={}",
+        env::var("CARGO_CFG_TARGET_FEATURE")
+            .unwrap_or_default()
+            .replace(',', " ")
+    );
+    println!("cargo:rustc-env=PLATFORM_STRING={}", platform.name);
 }
