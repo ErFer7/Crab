@@ -6,6 +6,7 @@ use crate::{
     utilities::direct_memory::{Bit, Register, bit, mask},
 };
 
+// TODO: Remove the pub
 pub type Buffer = Register<u8, { <NS16550 as Driver>::BASE }, 0x0>;
 pub type TransmitterStatus = Register<u8, { <NS16550 as Driver>::BASE }, 0x0>;
 pub type DividerLatchLow = Register<u8, { <NS16550 as Driver>::BASE }, 0x0>;

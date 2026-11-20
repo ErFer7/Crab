@@ -8,7 +8,12 @@ qemu-riscv32-virt:
 
 .PHONY: longan-nano
 longan-nano:
-	cargo +nightly build --target ./platforms/longan_nano/longan-nano.json --features longan-nano
+	cargo +nightly build --target ./platforms/longan_nano/longan-nano.json --release --features longan-nano
+	rust-objcopy -O binary ./target/longan-nano/release/crab ./bin/crab.bin
+
+.PHONY: flash-longan-nano
+flash-longan-nano:
+	dfu-util -a 0 -s 0x08000000:leave -D ./bin/crab.bin
 
 .PHONY: run
 run-riscv64-virt:

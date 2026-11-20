@@ -29,4 +29,6 @@ SECTIONS
         *(COMMON)
         __bss_end = .;
     }
+
+    /DISCARD/ : { *(.eh_frame*) *(.comment) }
 }

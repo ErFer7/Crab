@@ -1,3 +1,5 @@
+// FIX: The linter doesn't work
+
 #![allow(unused)]
 #![allow(unexpected_cfgs)]
 #![no_std]
@@ -18,6 +20,8 @@ use core::{
 use crate::{
     architecture::{BaseCPU, CPU, Status},
     driver::driver::Driver,
+    driver::gpio::{BaseGPIO, GPIO},
+    driver::rcu::{BaseRCU, RCU},
     driver::uart::{BaseUART, UART},
     machine::{MemoryTraits, SystemTraits},
 };
@@ -38,23 +42,12 @@ fn panic(_info: &PanicInfo) -> ! {
 
 fn print(string: &str) {
     for byte in string.chars().take_while(|&b| b != '\0') {
+        if byte == '\n' {
+            UART::write('\r');
+        }
+
         UART::write(byte);
     }
-}
-
-// This is necessary to ensure that the stack will be configured before we continue
-#[unsafe(no_mangle)]
-#[unsafe(link_section = ".text._boot")]
-#[unsafe(naked)]
-pub extern "C" fn _boot() -> ! {
-    naked_asm!(
-        "auipc t0, 0",      // t0 = current PC position
-        "li t1, {offset}",  // t1 = RAM_SIZE - STACK_SIZE
-        "add sp, t0, t1",   // sp = boot stack
-        "j {start}",
-        offset = const (MemoryTraits::RAM_SIZE - SystemTraits::STACK_SIZE * 2) as usize,
-        start = sym start,
-    );
 }
 
 extern "C" fn start() -> ! {
@@ -65,11 +58,14 @@ extern "C" fn start() -> ! {
     CPU::mie_write(0);
     CPU::mstatus_write(Status::MPP_M);
 
+    // TODO: Initialize the drivers elsewhere
+    RCU::init();
+    GPIO::init();
     UART::init();
 
     let greeting = include_str!("./boot_greeting.txt");
 
-    print("> Crab OS\n");
+    print("> ChaOS\n"); // Considerably Hacky-Ass Operating System
     print(concat!("> Architecture: ", env!("ARCH_STRING"), "\n"));
     print(concat!("   >> ", env!("ARCH_FEATURES_STRING"), "\n"));
     print(concat!("> Platform: ", env!("PLATFORM_STRING"), "\n\n"));

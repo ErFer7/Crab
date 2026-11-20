@@ -9,4 +9,4 @@ pub use ns16550::NS16550 as UART;
 #[cfg(platform = "longan-nano")]
 mod gd32_usart;
 #[cfg(platform = "longan-nano")]
-pub use gd32_usart::Gd32Usart as UART;
+pub use gd32_usart::GD32Usart as UART;

@@ -9,6 +9,6 @@ feature     = "qemu-riscv32-virt"
 linker      = "platforms/qemu_riscv32_virt/linker.ld"
 
 [[platform]]
-name        = "longan_nano"
+name        = "longan-nano"
 feature     = "longan-nano"
 linker      = "platforms/longan_nano/linker.ld"

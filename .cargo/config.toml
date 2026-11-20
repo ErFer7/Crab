@@ -1,6 +1,3 @@
-[build]
-target = "platforms/qemu_riscv64_virt/qemu-riscv64-virt.json"
-
 [unstable]
 json-target-spec = true
 build-std-features = ["compiler-builtins-mem"]
